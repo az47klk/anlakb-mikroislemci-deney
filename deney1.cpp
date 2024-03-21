@@ -1,36 +1,27 @@
+//
+//   Mikroişlemciler Laboratuvarı
+//   Deney 1
+//
+//   Anıl Akbaş
+//   200204019
+//
+
 #include <Arduino.h>
 
-// put function declarations here:
-
-void button1();
-void button2();
-void button3();
-void button4();
-void button5();
-void button6();
-void button7();
-void button8();
+void button1(); // button 1 basıldığında yapılacaklar
+void button2(); // button 2 basıldığında yapılacaklar
+void button3(); // button 3 basıldığında yapılacaklar
+void button4(); // button 4 basıldığında yapılacaklar
+void button5(); // button 5 basıldığında yapılacaklar
+void button6(); // button 6 basıldığında yapılacaklar
+void button7(); // button 7 basıldığında yapılacaklar
+void button8(); // button 8 basıldığında yapılacaklar
 
 int oldC = 8;
 int counter = 1;
 
-void getInput()
-{
-  Serial.print("A0: " + String(!digitalRead(A0))  + " ");
-  Serial.print("A1: " + String(!digitalRead(A1))  + " ");
-  Serial.print("A2: " + String(!digitalRead(A2))  + " ");
-  Serial.print("A3: " + String(!digitalRead(A3))  + " ");
-  Serial.print("A4: " + String(!digitalRead(A4))  + " ");
-  Serial.print("A5: " + String(!digitalRead(A5))  + " ");
-  Serial.print("12: " + String(!digitalRead(12))  + " ");
-  Serial.println("11: " + String(!digitalRead(11))  + " ");
-
-}
-
 void setup()
 {
-  
-  Serial.begin(9600);
 
   pinMode(2,OUTPUT);
   pinMode(3,OUTPUT);
@@ -42,6 +33,9 @@ void setup()
   pinMode(9,OUTPUT);
   pinMode(13, OUTPUT);
   
+  // button pinlerini internal pull-up
+  // yaparak kararlı hale getir
+
   pinMode(A0,INPUT_PULLUP);
   pinMode(A1,INPUT_PULLUP);
   pinMode(A2,INPUT_PULLUP);
@@ -53,15 +47,13 @@ void setup()
   
   for(int i = 2; i <= 9; i++)
   {
-  	digitalWrite(i,HIGH);
+    // tüm ledleri başlangıçta yak
+  	digitalWrite(i,HIGH); 
   }
-  
 }
 
 void loop()
 {
-  getInput();
-  
   if (!digitalRead(A0))
   {
     int c = 1;
@@ -88,45 +80,46 @@ void loop()
   
   if (!digitalRead(A1))
   {
-    
   	button2();
     delay(100);
   }
+  
   if (!digitalRead(A2))
   {
   	button3();
     delay(100);
   }
+  
   if (!digitalRead(A3))
   {
   	button4();
     delay(100);
   }
+  
   if (!digitalRead(A4))
   {
   	button5();
     delay(100);
   }
+  
   if (!digitalRead(A5))
   {
   	button6();
     delay(100);
   }
+  
   if (!digitalRead(11))
   {
   	button7();
     delay(150);
   }
+
   if (!digitalRead(12))
   {
   	button8();
     delay(100);
   }
-
-
 }
-
-
 
 void button1()
 {
@@ -144,7 +137,8 @@ void button2()
     {
       digitalWrite(i,LOW);
     }
-	for (int i = 9; i >= 2; i--)
+	  
+    for (int i = 9; i >= 2; i--)
     {
     	digitalWrite(i, HIGH);
       	delay(500);
@@ -154,14 +148,15 @@ void button2()
 void button3()
 {
 	for(int i = 2; i <= 9; i++)
-    {
-      digitalWrite(i,LOW);
-    }
-  	for (int i = 2; i <= 9; i++)
-    {
+  {
+    digitalWrite(i,LOW);
+  }
+
+  for (int i = 2; i <= 9; i++)
+  {
     	digitalWrite(i, HIGH);
-      	delay(500);
-    }
+    	delay(500);
+  }
 }
 
 void button4()
@@ -170,38 +165,47 @@ void button4()
   while(1)
   {
     ss[0]++;
+    
     if (ss[0] > 1){
       ss[0] = 0;
       ss[1]++;
     }
+    
     if (ss[1] > 1){
       ss[1] = 0;
       ss[2]++;
     }
+    
     if (ss[2] > 1){
       ss[2] = 0;
       ss[3]++;
     }
+    
     if (ss[3] > 1){
       ss[3] = 0;
       ss[4]++;
     }
+    
     if (ss[4] > 1){
       ss[4] = 0;
       ss[5]++;
     }
-     if (ss[5] > 1){
+    
+    if (ss[5] > 1){
       ss[5] = 0;
       ss[6]++;
     }
-     if (ss[6] > 1){
+    
+    if (ss[6] > 1){
       ss[6] = 0;
       ss[7]++;
     }
+
      if (ss[7] > 1){
       ss[7] = 1;
       break;
     }
+
     for (int i = 2; i <=9; i++)
     {
       digitalWrite(i, ss[i-2]);
