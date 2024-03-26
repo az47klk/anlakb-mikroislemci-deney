@@ -1,5 +1,3 @@
-#pragma GCC push_options
-#pragma GCC optimize ("O1")
 
 
 #include <LiquidCrystal.h>
@@ -34,14 +32,14 @@ void loop() {
 		if (kaymaMiktari <= -16)
 			kaymaMiktari = 16;
 		yaziyazdir();
-		delay(1);
+		delay(100);
 	}
 
 	if (!digitalRead(A1))
 	{
 		kaymaMiktari = 0;
 		yaziyazdir();
-		delay(1);
+		delay(100);
 	}
 
 	if (!digitalRead(A2))
@@ -50,9 +48,9 @@ void loop() {
 		if (kaymaMiktari >= 16)
 			kaymaMiktari = -16;
 		yaziyazdir();
-		delay(1);
+		delay(100);
 	}
 }
 
-#pragma GCC pop_options
+
 
